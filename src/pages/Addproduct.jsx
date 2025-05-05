@@ -1,7 +1,6 @@
+import React, { useState } from 'react';
 
-import React, { useState, useEffect } from 'react';
-
-function AddProduct({ setProducts }) {
+function AddProduct() {
   const [form, setForm] = useState({
     title: "",
     image: "",
@@ -28,15 +27,16 @@ function AddProduct({ setProducts }) {
       return;
     }
 
-    // Add new product
+    // Create new product and log to console
     const newProduct = {
       ...form,
-      id: Date.now(), // unique id
+      id: Date.now(),
       price: parseFloat(form.price),
       rating: { rate: parseFloat(form.rating.rate) }
     };
 
-    setProducts(prev => [newProduct, ...prev]);
+    console.log("New Product:", newProduct); // ✅ Required by your assignment
+
     alert("Product added!");
     setForm({ title: "", image: "", price: "", rating: { rate: "" } });
     setErrors({});
