@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import {
   Container,
@@ -12,8 +11,17 @@ import {
 
 const Home = ({ products }) => {
   return (
-    <Container sx={{ padding: '2rem' }}>
-      <Typography variant="h4" gutterBottom>
+    <Container sx={{ padding: '2rem', backgroundColor: '#f7f7f7' }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{
+          textAlign: 'center',
+          color: '#333',
+          fontWeight: 'bold',
+          mb: 4,
+        }}
+      >
         Product Dashboard
       </Typography>
       <Grid container spacing={3}>
@@ -28,6 +36,12 @@ const Home = ({ products }) => {
                 alignItems: 'center',
                 borderRadius: 2,
                 padding: 2,
+                boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                transition: 'transform 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'scale(1.05)',
+                  boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.15)',
+                },
               }}
             >
               <CardMedia
@@ -50,6 +64,8 @@ const Home = ({ products }) => {
                   flexDirection: 'column',
                   justifyContent: 'space-evenly',
                   width: '100%',
+                  backgroundColor: '#fff',
+                  borderRadius: 2,
                 }}
               >
                 <Typography
@@ -59,16 +75,31 @@ const Home = ({ products }) => {
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
+                    color: '#444',
                     mb: 1,
+                    fontWeight: '500',
                   }}
                 >
                   {product.title}
                 </Typography>
-                <Typography variant="body2" sx={{ mb: 0.5 }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: '#1e88e5', // blue color for price
+                    fontWeight: 'bold',
+                    mb: 0.5,
+                  }}
+                >
                   Price: ${product.price}
                 </Typography>
-                <Typography variant="body2">
-                  Rating: {product.rating.rate}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: '#fbc02d', // yellow for rating
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Rating: {product.rating.rate} ★
                 </Typography>
               </CardContent>
             </Card>
