@@ -1,4 +1,13 @@
-import React, { useState } from 'react';
+
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box
+} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+
 
 function AddProduct() {
   const [form, setForm] = useState({
@@ -27,7 +36,6 @@ function AddProduct() {
       return;
     }
 
-    // Create new product and log to console
     const newProduct = {
       ...form,
       id: Date.now(),
@@ -35,7 +43,7 @@ function AddProduct() {
       rating: { rate: parseFloat(form.rating.rate) }
     };
 
-    console.log("New Product:", newProduct); // ✅ Required by your assignment
+    console.log("New Product:", newProduct);
 
     alert("Product added!");
     setForm({ title: "", image: "", price: "", rating: { rate: "" } });
@@ -52,21 +60,48 @@ function AddProduct() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ padding: "1rem" }}>
-      <input name="title" placeholder="Product Title" value={form.title} onChange={handleChange} />
-      {errors.title && <p style={{ color: 'red' }}>{errors.title}</p>}
-
-      <input name="image" placeholder="Image URL" value={form.image} onChange={handleChange} />
-      {errors.image && <p style={{ color: 'red' }}>{errors.image}</p>}
-
-      <input name="price" placeholder="Price" value={form.price} onChange={handleChange} />
-      {errors.price && <p style={{ color: 'red' }}>{errors.price}</p>}
-
-      <input name="rate" placeholder="Rating" value={form.rating.rate} onChange={handleChange} />
-      {errors.rating && <p style={{ color: 'red' }}>{errors.rating}</p>}
-
-      <button type="submit" style={{ backgroundColor: "black", color: "white" }}>Add Product</button>
-    </form>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Typography variant="h5" gutterBottom>
+        Add New Product
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <TextField
+          name="title"
+          label="Product Title"
+          value={form.title}
+          onChange={handleChange}
+          error={!!errors.title}
+          helperText={errors.title}
+        />
+        <TextField
+          name="image"
+          label="Image URL"
+          value={form.image}
+          onChange={handleChange}
+          error={!!errors.image}
+          helperText={errors.image}
+        />
+        <TextField
+          name="price"
+          label="Price"
+          value={form.price}
+          onChange={handleChange}
+          error={!!errors.price}
+          helperText={errors.price}
+        />
+        <TextField
+          name="rate"
+          label="Rating"
+          value={form.rating.rate}
+          onChange={handleChange}
+          error={!!errors.rating}
+          helperText={errors.rating}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Add Product
+        </Button>
+      </Box>
+    </Container>
   );
 }
 
